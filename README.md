@@ -68,3 +68,5 @@ Imagine you’re in the car business or driving around. Tires with cracks are a 
    ```
 
 2. Download the Tire Texture data and save it in `data` and rename the `Tire Texture` to `TireTexture`
+
+3. Reach out in case of difficulties
