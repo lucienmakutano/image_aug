@@ -1,31 +1,31 @@
 from tensorflow.keras import layers, models
 
-# This function builds our CNN model (the thing that learns to recognize tire images)
+# This function creates our model that learns to tell tire pictures apart
 def create_cnn(input_shape, num_classes):
-    # Start building the model
-   _model =  models.Sequential([
-        # First convolutional layer: filters out image features (like edges, textures)
-        layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape),  # 32 filters of 3x3 size
-        layers.MaxPooling2D((2, 2)),  # Pooling reduces the size to make it faster (picks the best info)
+    # Start making the model
+   _model = models.Sequential([
+        # First layer: checks picture features like edges and patterns
+        layers.Conv2D(32, (3, 3), activation='relu', input_shape=input_shape),  # 32 small filters
+        layers.MaxPooling2D((2, 2)),  # Makes the picture smaller but keeps important details
 
-        # Second convolutional layer: digs deeper into the image features
-        layers.Conv2D(64, (3, 3), activation='relu'),  # 64 filters, better at details
-        layers.MaxPooling2D((2, 2)),  # Pool again to summarize the info
+        # Second layer: looks deeper into the picture features
+        layers.Conv2D(64, (3, 3), activation='relu'),  # 64 filters for clearer details
+        layers.MaxPooling2D((2, 2)),  # Makes it smaller again
 
-        # Third convolutional layer: even deeper details
-        layers.Conv2D(128, (3, 3), activation='relu'),  # More filters for complex features
-        layers.MaxPooling2D((2, 2)),  # Reduce size once more
+        # Third layer: digs deeper to get even finer details
+        layers.Conv2D(128, (3, 3), activation='relu'),  # Adds more filters for complex stuff
+        layers.MaxPooling2D((2, 2)),  # Shrinks it down one more time
 
-        # Flatten the data so it can be fed into the final decision layers
+        # Flattens all the info so it can pass to the next part
         layers.Flatten(),
 
-        # Fully connected (dense) layer: mixes everything to make sense of it
+        # Fully connected layer that brings all the info together
         layers.Dense(128, activation='relu'),
 
-        # Dropout layer to prevent the model from "cramming" (overfitting)
+        # Adds some randomness to stop it from cramming too much info
         layers.Dropout(0.5),
 
-        # Final output layer: the softmax gives probabilities for each class (e.g., cracked or normal)
+        # Final layer gives the chances of each class like cracked or normal tire
         layers.Dense(num_classes, activation='softmax')
     ])
 
